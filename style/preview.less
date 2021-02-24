@@ -36,7 +36,7 @@
 		}
 
 		&-wordmark {
-			background-image: url( https://wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en.svg );
+			background-image: url( https://www.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en.svg );
 			background-repeat: no-repeat;
 			background-position: left;
 			height: 100%;
@@ -51,13 +51,13 @@
 			@wordmark-languages: ar, atj, bn, ca, cs, cy, et, fa, fr, he, hi, ja, la, ps, ru, sd, sr, szl, tr, ur, uz, zh-c;
 			each(@wordmark-languages, {
 				&-@{value} {
-					background-image: url( 'https://wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-@{value}.svg' );
+					background-image: url( 'https://www.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-@{value}.svg' );
 				}
 			});
 		}
 
 		&-closebtn {
-			background-image: inline-svg( '../images/close.svg' );
+			background-image: url( https://www.wikipedia.org/static/images/wikipedia-preview/close.svg );
 			background-repeat: no-repeat;
 			background-position: center;
 			cursor: pointer;
@@ -127,7 +127,7 @@
 			&:extend( .wikipediapreview-body-non-regular );
 
 			.wikipediapreview-body-icon {
-				content: inline-svg( '../images/error-preview.svg' );
+				content: url( https://www.wikipedia.org/static/images/wikipedia-preview/error-preview.svg );
 			}
 		}
 
@@ -135,7 +135,7 @@
 			&:extend( .wikipediapreview-body-non-regular );
 
 			.wikipediapreview-body-icon {
-				content: inline-svg( '../images/articles.svg' );
+				content: url( https://www.wikipedia.org/static/images/wikipedia-preview/articles.svg );
 			}
 		}
 
@@ -148,7 +148,7 @@
 			}
 
 			.wikipediapreview-body-icon {
-				content: inline-svg( '../images/offline-icon.svg' );
+				content: url( https://www.wikipedia.org/static/images/wikipedia-preview/offline-icon.svg );
 			}
 
 			.wikipediapreview-body-action {

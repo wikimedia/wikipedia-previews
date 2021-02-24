@@ -1,5 +1,4 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const LessPluginInlineSvg = require('less-plugin-inline-svg');
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -75,13 +74,7 @@ const config = {
           'css-loader',
           {
             loader: 'less-loader', options: {
-              sourceMap: true,
-              plugins:
-              [
-                new LessPluginInlineSvg({
-                  base64: true
-                })
-              ]
+              sourceMap: true
             }
           },
         ]
@@ -93,13 +86,7 @@ const config = {
             'css-loader',
             {
               loader: 'less-loader', options: {
-                sourceMap: true,
-                plugins:
-                [
-                  new LessPluginInlineSvg({
-                    base64: true
-                  })
-                ]
+                sourceMap: true
               }
             },
           ],

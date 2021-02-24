@@ -8,7 +8,7 @@
 }
 
 .wmf-wp-with-preview::after {
-  content: inline-svg('../images/info_24_px.svg');
+  content: url( https://www.wikipedia.org/static/images/wikipedia-preview/info_24_px.svg );
   display: inline-block;
   vertical-align: middle;
   margin-left: 1px;
