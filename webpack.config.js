@@ -1,18 +1,43 @@
 const webpack = require('webpack')
 const childProcess = require('child_process')
-const fs = require('fs')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const LessPluginInlineSvg = require('less-plugin-inline-svg');
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
+const LessPluginInlineSvg = require('less-plugin-inline-svg');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const fs = require('fs');
 const path = require('path');
+const CryptoJS = require("crypto-js");
+const { EXTERNAL_IMAGE_PATH, EXCLUDE_STYLE } = process.env;
+
+// This is a less plugin to build cache-busting wikipedia urls
+class WikipediaImage {
+    install(less) {
+      less.functions.functionRegistry.add(
+        'wikipedia-image', function (fileArg, iconIdArg, svgArgs) {
+          const { value } = fileArg;
+
+          if ( EXTERNAL_IMAGE_PATH ) {
+            const fileUrl = `${EXTERNAL_IMAGE_PATH}/${value}`
+            const fileContent = fs.readFileSync('./images/' + value).toString()
+            const hash = CryptoJS.MD5(fileContent).toString().slice(0, 5)
+            const fullUrl = `${fileUrl}?${hash}`;
+            return new (less.tree.Quoted)( '"', "url('" + fullUrl + "')" );
+          } else {
+            const inlineSvg = less.functions.functionRegistry.get('inline-svg').bind(this)
+            return inlineSvg( { value: `../images/${value}` }, iconIdArg, svgArgs)
+          }
+        }
+      )
+    }
+}
+
 const config = {
   entry: {
     'wikipedia-preview': './src/index.js',
-    'default-link-style': './src/linkStyle.js'
+    'wikipedia-preview-style': './src/style.js',
+    'wikipedia-preview-link': './src/linkStyle.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -33,10 +58,8 @@ const config = {
         files: '*.less',
         fix: true
       }),
-      new MiniCssExtractPlugin({
-        filename: 'wikipedia-preview.css'
-      }),
-      new IgnoreEmitPlugin(['default-link-style.production.js', 'default-link-style.development.js']),
+      new MiniCssExtractPlugin(),
+      new IgnoreEmitPlugin(/wikipedia-preview-.*\.js/),
       new CompressionPlugin(),
       new BundleAnalyzerPlugin({
         analyzerMode: 'disabled',
@@ -78,34 +101,32 @@ const config = {
       {
         test: /\.less$/,
         use: [
-          'style-loader',
-          'css-loader',
+          !!EXCLUDE_STYLE ? 'null-loader' : 'style-loader',
+          { loader: 'css-loader', options: { url: !EXTERNAL_IMAGE_PATH } },
           {
             loader: 'less-loader', options: {
               sourceMap: true,
               plugins:
               [
-                new LessPluginInlineSvg({
-                  base64: true
-                })
+                new LessPluginInlineSvg({ base64: true }),
+                new WikipediaImage()
               ]
             }
           },
         ]
       },
       {
-        test: /\.css$/i,
+        test: /style\.less|link\.less/,
         use: [
             MiniCssExtractPlugin.loader,
-            'css-loader',
+            { loader: 'css-loader', options: { url: !EXTERNAL_IMAGE_PATH } },
             {
               loader: 'less-loader', options: {
                 sourceMap: true,
                 plugins:
                 [
-                  new LessPluginInlineSvg({
-                    base64: true
-                  })
+                  new LessPluginInlineSvg({ base64: true }),
+                  new WikipediaImage()
                 ]
               }
             },

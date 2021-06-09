@@ -1,1 +1,1 @@
-import '../style/link.css'
+import '../style/link.less'
