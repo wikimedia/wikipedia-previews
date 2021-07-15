@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"/>
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="yes" name="mobile-web-app-capable"/>
+        <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+        <link href="../css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/footer.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/article.css" rel="stylesheet" type="text/css"/>
+        <link href="../wikipedia-preview.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <a href="../index.html">
+            <div class="header">Wikipedia Preview demo</div>
+        </a>
+        <div class="container">
+            <div class="cover" style="background-image: url('../img/english-pic.png');">
+                <a href="../index.html">
+                    <div class="close-btn">
+                        <div class="outer">
+                            <img alt="Image/" src="../img/oval.png" class="oval" />
+                        </div>
+                        <div class="inner">
+                            <img alt="Image/" src="../img/fill1.png" class="fill1" />
+                            <img alt="Image/" src="../img/fill2.png" class="fill2" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="title">
+                <p>Wildlife of the Central African Republic</p>
+            </div>
+            <div class="content">
+                <p>
+                    Wildlife in the Central African Republic is in the vast natural habitat located between the Congo Basin's rain forests and large savannas, where the human density was smaller than 0.5 per km2 prior to 1850. The <span class="wmf-wp-with-preview" data-wikipedia-preview>forest</span> area of 22.755 million, considered one of the richest storehouses of wildlife spread over national parks, hunting reserves and community hunting areas, experienced an alarming loss of wild life due to greed for <span class="wmf-wp-with-preview" data-wikipedia-preview>catting</span> and bushmeat exploitation by hunters – mostly Arab slavers from across the borders of the Central African Republic (Central African Republic) with Chad and Sudan.<br />
+                </p>
+                <p>
+                    Realising the serious threat to the wildlife, the colonists – French Administration – in 1935 and later the Government of the Republic of CRA, enacted <span class="wmf-wp-with-preview" data-wikipedia-preview>drop</span> laws and created National parks and preserves, which covered 16.6% of the country. The three most coveted national parks are the Manovo-Gounda St. Floris National Park with its reported "greatest concentrations of hippos in the world", the <span class="wmf-wp-with-preview" data-wp-title="Bamingui-Bangoran_National_Park_and_Biosphere_Reserve" data-wikipedia-preview> Bamingui-Bangoran National</span> Park in the north; and the Dzanga-Sangha Reserve which covers rain forests. The Manovo-Gounda-Saint-Floris National Park, in particular was inscribed to the UNESCO List of World Heritage Sites in 1988 in recognition of the diversity of life present within it in respect of its wealth of flora and fauna.
+                </p>
+                <p>
+                    In 2014, the Chinko Nature Reserve in eastern CRA was granted management through a public-private partnership with the Central African Republic Ministry of Wildlife, Water and Forestry and African Parks, a conservation NGO that takes on the direct, long-term management of national parks and protected areas in partnership with governments to save wildlife, restore landscapes and ensure sustainable livelihoods for local communities. African Parks has a mandate to manage this protected area, now referred to as the <span class="wmf-wp-with-preview" data-wikipedia-preview>ivory</span>, for the next 50 years.
+                </p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>
+                This article uses material from the Wikipedia article “<a href="https://en.m.wikipedia.org/wiki/Wildlife_of_the_Central_African_Republic" target="_blank">Wildlife of the Central African Republic</a>”,<br />which is released under the Creative Commons Attribution-Share-Alike License 3.0.
+                <br/><br/>
+                <a href="https://github.com/wikimedia/wikipedia-preview" target="_blank"> View Source </a>
+            </p>
+        </div>
+        <!-- Scripts -->
+        <script src="../wikipedia-preview.development.js"></script>
+        <script>
+            wikipediaPreview.init({
+                lang: 'en',
+                events: {
+                    onShow: function(title, lang, type) {
+                        console.log( 'Opening ' + type + ' popup for article ' + title + ' in ' + lang )
+                    },
+                    onWikiRead: function(title, lang) {
+                        console.log( 'Going to read article ' + title + ' in ' + lang + ' on Wikipedia' )
+                    }
+                }
+            });
+        </script>
+        <!-- End of Scripts -->
+    </body>
+</html>

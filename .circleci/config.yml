@@ -2,12 +2,25 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:12.0-browsers
+      - image: cimg/node:15.9.0-browsers
     steps:
       - add_ssh_keys:
           fingerprints:
             - "e3:56:4b:3d:1c:58:a6:f9:7d:24:0a:90:01:77:aa:fb"
       - checkout
+      - run:
+          name: Build and Test
+          command: |
+            npm install
+            npm run build
+            npm run dev &
+            npm run cypress:run 
+      - store_artifacts:
+          path: cypress/screenshots
+          destination: screenshots
+      - store_artifacts:
+          path: cypress/videos
+          destination: videos
       - run:
           name: Prepare
           command: npm install
