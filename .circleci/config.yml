@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:12.0-browsers
+      - image: cimg/node:15.9.0-browsers
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -17,6 +17,17 @@ jobs:
       - run:
           name: Unit Test (with coverage)
           command: npm run coverage
+      - run:
+          name: Cypress Tests
+          command: 
+            npm run dev &
+            npm run cypress:run 
+      - store_artifacts:
+          path: cypress/screenshots
+          destination: screenshots
+      - store_artifacts:
+          path: cypress/videos
+          destination: videos
       - run:
           name: Build Storybook
           command: npm run build-storybook
